@@ -988,12 +988,25 @@ class WP_Import extends WP_Importer {
 		if ( $upload['error'] )
 			return new WP_Error( 'upload_dir_error', $upload['error'] );
 
-		// fetch the remote url and write it to the placeholder file
-		$remote_response = wp_safe_remote_get( $url, array(
-			'timeout' => 300,
-            		'stream' => true,
-            		'filename' => $upload['file'],
-        	) );
+        // fetch the remote url and write it to the placeholder file
+        // XTEC ************ MODIFICAT - Disable ssl verification
+        // 2019.11.09 @nacho
+        $remote_response = wp_safe_remote_get( $url, array(
+            'timeout' => 300,
+            'stream' => true,
+            'filename' => $upload['file'],
+            'sslverify' => FALSE,
+        ) );
+
+        //************ ORIGINAL
+        /*
+        $remote_response = wp_safe_remote_get( $url, array(
+            'timeout' => 300,
+                    'stream' => true,
+                    'filename' => $upload['file'],
+            ) );
+        */
+        //************ FI
 
 		$headers = wp_remote_retrieve_headers( $remote_response );
 
