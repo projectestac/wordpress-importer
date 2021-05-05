@@ -1082,6 +1082,12 @@ class WP_Import extends WP_Importer {
 				'timeout'  => 300,
 				'stream'   => true,
 				'filename' => $tmp_file_name,
+
+				// XTEC ************ AFEGIT - Disable SSL verification
+				// 2019.11.09 @nacho
+				'sslverify'  => false,
+				//************ FI
+
 				'headers'  => array(
 					'Accept-Encoding' => 'identity',
 				),
